@@ -8,10 +8,11 @@
 
 ---
 
-## ✨ 주요 기능 (화면별 정리)
+## 주요 기능 (화면별 정리)
 
-### 1. 🔐 [로그인](app/src/main/java/com/example/refac_driverapp/Login.kt) / [회원가입 화면](app/src/main/java/com/example/refac_driverapp/Register.kt)
-- [로그인 레이아웃](app/src/main/res/layout/activity_login.xml) [회원가입 레이아웃](app/src/main/res/layout/activity_register.xml)
+### 1. 로그인 [Login.kt](app/src/main/java/com/example/refac_driverapp/Login.kt) / 회원가입 화면 [Register.kt](app/src/main/java/com/example/refac_driverapp/Register.kt)
+- 로그인 레이아웃 [보러가기](app/src/main/res/layout/activity_login.xml)
+- 회원가입 레이아웃 [보러가기](app/src/main/res/layout/activity_register.xml)
 - Firebase Authentication을 이용한 이메일/비밀번호 로그인
 - 자동 로그인 기능 (CheckBox 클릭 시)
 - 운전자 전용 계정으로 사용자와 구분 로그인 처리
@@ -20,8 +21,8 @@
 
 ---
 
-### 2. 📅 [노선 및 시간 선택 화면](app/src/main/java/com/example/refac_driverapp/RouteTime.kt)
-- [레이아웃](app/src/main/res/layout/activity_route_time.xml)
+### 2. 노선 및 시간 선택 화면 [RouteTime.kt](app/src/main/java/com/example/refac_driverapp/RouteTime.kt)
+- 레이아웃 [보러가기](app/src/main/res/layout/activity_route_time.xml)
 - Spinner로 노선 선택 (운전 가능한 노선 목록 표시)
 - 선택한 노선에 따라 시간 목록 자동 갱신
 - 노선과 시간 둘 다 선택 시에만 확인 버튼 활성화
@@ -30,8 +31,8 @@
 
 ---
 
-### 3. 🕒 [운행 화면](app/src/main/java/com/example/refac_driverapp/Clock.kt)
-- [레이아웃](app/src/main/res/layout/activity_clock.xml)
+### 3. 운행 화면 [Clock.kt](app/src/main/java/com/example/refac_driverapp/Clock.kt)
+- 레이아웃 [보러가기](app/src/main/res/layout/activity_clock.xml)
 - 선택한 노선/시간에 따라 예약된 정류장 리스트 출력
 - 각 정류장별 예약 인원 수를 실시간으로 표시 (RecyclerView 사용)
 - 예약 수에 따라 뱃지 색상 자동 변경 (ex. 0명 = 회색, 다수 = 강조)
@@ -44,8 +45,8 @@
 
 ---
 
-### 4. 🧾 [운행 종료 후 화면](app/src/main/java/com/example/refac_driverapp/Finish.kt)
-- [레이아웃](app/src/main/res/layout/activity_finish.xml)
+### 4. 운행 종료 후 화면 [Finish.kt](app/src/main/java/com/example/refac_driverapp/Finish.kt)
+- 레이아웃 [보러가기](app/src/main/res/layout/activity_finish.xml)
 - 해당 운전자가 운전한 노선, 시간, 운전 종료 시간 출력
 - RouteTime.kt에서 저장된 DB에 종료시간(endTime)이 추가로 저장
 - 다음 노선 선택, 운행 기록 확인, 로그아웃, 어플리케이션 종료 기능의 4개 버튼
@@ -53,8 +54,8 @@
 
 ---
 
-### 5. 🧾 [운행 기록 확인 화면](app/src/main/java/com/example/refac_driverapp/SelectBusList.kt)
-- [레이아웃](app/src/main/res/layout/activity_selectbuslist.xml)
+### 5. 운행 기록 확인 화면 [SelectBusList.kt](app/src/main/java/com/example/refac_driverapp/SelectBusList.kt)
+- 레이아웃 [보러가기](app/src/main/res/layout/activity_selectbuslist.xml)
 - 해당 운전자의 과거 운행 내역 조회 (내림차순 정렬)
 - RecyclerView로 기록 목록 출력
 - Back 버튼 클릭 시 Finish 페이지로 이동
@@ -65,13 +66,13 @@
 
 ---
 
-### 6. 🧩 공통 기능
+### 6. 공통 기능
 - Firebase 기반 실시간 데이터 연동
 - 기기 내 뒤로가기 버튼 두번 틀릭 시 어플리케이션 종료
 
 ---
 
-## ⚙️ 사용 기술
+## 사용 기술
 
 | 분류 | 기술 |
 |------|------|

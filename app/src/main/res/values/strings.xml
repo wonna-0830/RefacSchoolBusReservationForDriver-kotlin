@@ -1,0 +1,83 @@
+<resources>
+    <string name="app_name">driverr_bus</string>
+
+    <string-array name="first_spinner_items">
+        <item>운행하실 노선을 선택해주세요!</item>
+        <item>교내 순환</item>
+        <item>하양역->교내순환</item>
+        <item>안심역->교내순환</item>
+        <item>사월역->교내순환</item>
+        <item>A2->안심역->사월역</item>
+    </string-array>
+
+    <string-array name="second_spinner_items_option1">
+        <item>운행하실 시간을 선택해주세요!</item>
+        <item>08:25</item>
+        <item>08:35</item>
+        <item>08:40</item>
+        <item>08:55</item>
+        <item>09:00</item>
+        <item>09:30</item>
+        <item>09:40</item>
+        <item>09:50</item>
+        <item>10:00</item>
+        <item>10:10</item>
+        <item>10:20</item>
+        <item>10:30</item>
+        <item>10:40</item>
+        <item>10:50</item>
+        <item>11:00</item>
+    </string-array>
+
+    <string-array name="second_spinner_items_option2">
+        <item>운행하실 시간을 선택해주세요!</item>
+        <item>08:30</item>
+        <item>08:50</item>
+        <item>08:57</item>
+        <item>09:10</item>
+    </string-array>
+
+    <string-array name="second_spinner_items_option3">
+        <item>운행하실 시간을 선택해주세요!</item>
+        <item>08:10</item>
+        <item>08:20</item>
+        <item>08:25</item>
+        <item>08:30</item>
+        <item>08:40</item>
+        <item>08:50</item>
+        <item>09:00</item>
+        <item>09:30</item>
+        <item>09:50</item>
+        <item>10:10</item>
+        <item>10:20</item>
+        <item>10:30</item>
+        <item>12:20</item>
+    </string-array>
+
+    <string-array name="second_spinner_items_option4">
+        <item>운행하실 시간을 선택해주세요!</item>
+        <item>08:00</item>
+        <item>08:05</item>
+        <item>08:20</item>
+        <item>08:40</item>
+        <item>09:00</item>
+        <item>09:30</item>
+        <item>09:50</item>
+        <item>10:00</item>
+    </string-array>
+
+    <string-array name="second_spinner_items_option5">
+        <item>운행하실 시간을 선택해주세요!</item>
+        <item>16:00</item>
+        <item>16:15</item>
+        <item>16:30</item>
+        <item>16:40</item>
+        <item>16:50</item>
+        <item>17:00</item>
+        <item>17:15</item>
+        <item>17:30</item>
+    </string-array>
+
+    <string name="back"><![CDATA[< BACK]]></string>
+    <string name="home"><![CDATA[HOME]]></string>
+</resources>

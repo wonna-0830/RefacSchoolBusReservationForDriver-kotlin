@@ -31,7 +31,7 @@
 ### 2. 노선 및 시간 선택 화면 [RouteTime.kt](app/src/main/java/com/example/refac_driverapp/RouteTime.kt)
 - [레이아웃](https://github.com/wonna-0830/routetime)
 <a href="https://github.com/wonna-0830/routetime">
-  <img src="images/routechoose.jpg" width="180">
+  <img src="images/routetime.jpg" width="180">
 </a>
 
 - [XML](app/src/main/res/layout/activity_route_time.xml)

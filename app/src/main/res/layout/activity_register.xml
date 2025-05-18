@@ -123,15 +123,15 @@
 
     <ImageView
         android:id="@+id/imageView6"
-        android:layout_width="286dp"
-        android:layout_height="267dp"
+        android:layout_width="376dp"
+        android:layout_height="429dp"
+        android:src="@drawable/many_people"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.122"
-        android:src="@drawable/many_people" />
+        app:layout_constraintVertical_bias="0.122" />
 
     <ProgressBar
         android:id="@+id/progressBar"

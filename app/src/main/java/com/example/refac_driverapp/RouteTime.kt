@@ -40,7 +40,6 @@ class RouteTime : ComponentActivity() {
         "A2->안심역->사월역" to listOf("시간을 선택하세요", "16:00", "16:15", "16:30", "16:40", "16:50", "17:00", "17:16", "17:30")
     )
 
-    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_route_time)

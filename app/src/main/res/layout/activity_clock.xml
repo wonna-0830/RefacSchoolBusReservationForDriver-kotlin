@@ -11,7 +11,7 @@
         android:id="@+id/textCurrentTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="32dp"
         android:text="00:00:00"
         android:textSize="70sp"
         android:textStyle="bold"
@@ -28,23 +28,22 @@
         android:text="노선명"
         android:gravity="center"
         android:textColor="#444444"
-        android:textSize="35sp"
+        android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textCurrentTime" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerStations"
-        android:layout_width="409dp"
-        android:layout_height="585dp"
+        android:layout_width="403dp"
+        android:layout_height="540dp"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toTopOf="@id/startButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textRouteName"
-        app:layout_constraintVertical_bias="0.868" />
+        app:layout_constraintVertical_bias="0.822" />
 
     <Button
         android:id="@+id/startButton"

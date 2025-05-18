@@ -12,7 +12,10 @@ import androidx.compose.animation.core.snap
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -62,48 +65,40 @@ class Clock : ComponentActivity() {
             else -> emptyList()
         }
 
-        /* 정류장별 예약자 수 초기화 + 예약자 수를 셀 때 쓸 카운터 Map */
-        val stationCountMap = mutableMapOf<String, Int>()
-        stationNames.forEach {stationCountMap[it] = 0}
         val database = FirebaseDatabase.getInstance().reference
-
         /* Firebase에서 전체 사용자 예약을 불러와 그 안의 reservation을 하나하나 확인 */
-        database.child("users").get().addOnSuccessListener { snapshot ->
-            for (userSnapshot in snapshot.children) {
-                val reservations = userSnapshot.child("reservations").children
-                for (reservation in reservations) {
-                    /* 학생들의 예약 정보 중에 조건에 맞는 것만 집계
-                     기사님이 선택한 노선, 시간대가 맞으면 count +1
-                      오늘 날짜와 같을 때만 집계!*/
-                    val route = reservation.child("route").getValue(String::class.java)
-                    val station = reservation.child("station").getValue(String::class.java) ?: continue
-                    val time = reservation.child("time").getValue(String::class.java)
-                    val date = reservation.child("date").getValue(String::class.java)
-                    val today = SimpleDateFormat("yy-MM-dd", Locale.getDefault()).format(Date())
+        database.child("users").addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val stationCountMap = mutableMapOf<String, Int>()
+                stationNames.forEach { stationCountMap[it] = 0 }
 
-                    Log.d("예약 필터", "route=$route, time=$time, date=$date, station=$station")
-                    Log.d("예약 필터", "오늘 날짜: $today")
+                for (userSnapshot in snapshot.children) {
+                    val reservations = userSnapshot.child("reservations").children
+                    for (reservation in reservations) {
+                        val route = reservation.child("route").getValue(String::class.java)
+                        val station = reservation.child("station").getValue(String::class.java) ?: continue
+                        val time = reservation.child("time").getValue(String::class.java)
+                        val date = reservation.child("date").getValue(String::class.java)
+                        val today = SimpleDateFormat("yy-MM-dd", Locale.getDefault()).format(Date())
 
-
-
-                    if (route == selectedRoute && time == selectedTime && date == today && station in stationCountMap.keys) {
-                        stationCountMap[station] = stationCountMap[station]!! + 1
+                        if (route == selectedRoute && time == selectedTime && date == today && station in stationCountMap) {
+                            stationCountMap[station] = stationCountMap[station]!! + 1
+                        }
                     }
                 }
-            }
-            // 집계된 값으로 StationInfo 리스트 만들기
-            val stationInfoList = stationNames.map { station ->
-                StationInfo(station, stationCountMap[station] ?: 0)
+
+                val stationInfoList = stationNames.map { station ->
+                    StationInfo(station, stationCountMap[station] ?: 0)
+                }
+
+                recyclerView.adapter = ClockAdapter(stationInfoList)
             }
 
-            if (stationInfoList.isNotEmpty()) {
-                recyclerView.adapter = ClockAdapter(stationInfoList)
-            } else {
-                Log.d("Clock", "예약된 인원이 없습니다.")
+            override fun onCancelled(error: DatabaseError) {
+                Log.e("Firebase", "실시간 데이터 수신 실패: ${error.message}")
             }
-            Log.d("Clock", "어댑터 연결 전 stationInfoList: $stationInfoList")
-            recyclerView.adapter = ClockAdapter(stationInfoList)
-        }
+        })
+
 
         //뒤로가기 클릭 시 페이지 이동, 탈주 방지 (운전 중에 사용하는 페이지이기 때문에 막음)
         onBackPressedDispatcher.addCallback(this) {
@@ -147,4 +142,5 @@ class Clock : ComponentActivity() {
         super.onDestroy()
         timeHandler.removeCallbacks(timeRunnable) // 메모리 누수 방지!!
     }
+
 }

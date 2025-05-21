@@ -19,6 +19,7 @@ import com.google.firebase.database.ValueEventListener
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
+import android.view.WindowManager
 
 class Clock : ComponentActivity() {
     // 실시간 시계용 변수
@@ -36,6 +37,8 @@ class Clock : ComponentActivity() {
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerStations)
         recyclerView.layoutManager = LinearLayoutManager(this)
         val textRouteName = findViewById<TextView>(R.id.textRouteName)
+
+        window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
 
         /* 기사님이 선택한 노선과 시간 받기 (RouteTime 클래스에서) */
         val selectedRoute = intent.getStringExtra("route") ?: ""
@@ -112,6 +115,8 @@ class Clock : ComponentActivity() {
                 Toast.makeText(this, "한 번 더 누르면 운행이 종료됩니다.", Toast.LENGTH_SHORT).show()
                 finishClickCount++
             } else {
+                window.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+
                 //RouteTime에서 Clock으로 보낸 노선과 시간을 다시 Finish 페이지로 넘김
                 val route = intent.getStringExtra("route")
                 val time = intent.getStringExtra("time")

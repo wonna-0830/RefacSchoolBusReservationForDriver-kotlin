@@ -7,6 +7,7 @@
 - Firebase を活用し、**リアルタイム予約者数の確認**、**運行記録の確認**、  
 - **簡単な時間／路線の管理**ができるように設計されています。  
 - **デモ動画を見る** [📽️](https://youtube.com/shorts/iBq0nHXdfOc?feature=share)
+- 📄 [🇰🇷 韓国語版READMEはこちら](./README.md)
 
 ---
 

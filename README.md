@@ -1,12 +1,12 @@
 # 🚌 모교 스쿨버스 예약 시스템 운전자용 (리팩토링 버전)
 
-- RefacSchoolBusReservationForDriver-kotlin
 - 2024 대구가톨릭대학교 캡스톤디자인 🥉장려상 수상작(스쿨버스 예약 시스템) Kotlin 리팩토링 버전입니다. 
 
 - 스쿨버스 운행을 위한 **운전자 전용 앱**입니다.  
 - Firebase를 활용해 **실시간 예약자 수 조회**, **운행 기록 확인**,  
 - **간편한 시간/노선 관리**가 가능한 구조로 설계되어 있습니다.
 - **시연영상 보러가기** [📽️](https://youtube.com/shorts/iBq0nHXdfOc?feature=share)
+- **📄 [🇯🇵 日本語版READMEはこちら](./README.ja.md)**
 
 ---
 

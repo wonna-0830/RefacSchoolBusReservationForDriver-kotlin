@@ -15,11 +15,12 @@ import androidx.activity.ComponentActivity
 import androidx.activity.OnBackPressedCallback
 import com.google.firebase.auth.FirebaseAuth
 import androidx.core.content.edit
+import com.google.firebase.database.FirebaseDatabase
 
 class Login : ComponentActivity() {
-    private lateinit var etEmail: EditText
-    private lateinit var etPwd: EditText
-    private lateinit var btnLogin: Button
+    private lateinit var mEtEmail: EditText
+    private lateinit var mEtPwd: EditText
+    private lateinit var mBtnLogin: Button
     private lateinit var mBtnRegister: Button
     private lateinit var autoLogin: CheckBox
     private lateinit var auth: FirebaseAuth
@@ -30,58 +31,78 @@ class Login : ComponentActivity() {
 
         auth = FirebaseAuth.getInstance()
 
-        etEmail = findViewById(R.id.et_email)
-        etPwd = findViewById(R.id.et_pwd)
-        btnLogin = findViewById(R.id.btn_login)
+        mEtEmail = findViewById(R.id.et_email)
+        mEtPwd = findViewById(R.id.et_pwd)
+        mBtnLogin = findViewById(R.id.btn_login)
         mBtnRegister = findViewById(R.id.btn_register)
         autoLogin = findViewById(R.id.autoLogin)
         autoLogin.isChecked = false
 
 
-        val prefs = getSharedPreferences("login_prefs", MODE_PRIVATE)
-        val isAutoLogin = prefs.getBoolean("autoLogin", false)
+        mBtnLogin.setOnClickListener {
+            val strEmail = mEtEmail.text.toString()
+            val strPwd = mEtPwd.text.toString()
+            val checkBoxAutoLogin = findViewById<CheckBox>(R.id.autoLogin)
 
-        Log.d("AutoLogin", "자동 로그인 상태: $autoLogin")
-
-        if (isAutoLogin) {
-            val email = prefs.getString("email", null)
-            val password = prefs.getString("password", null)
-
-            if (!email.isNullOrEmpty() && !password.isNullOrEmpty()) {
-                Log.d("AutoLogin", "자동 로그인 시도 중: $email")
-                FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
-                    .addOnSuccessListener {
-                        Toast.makeText(this, "자동 로그인 성공!", Toast.LENGTH_SHORT).show()
-                        val intent = Intent(this, RouteTime::class.java)
-                        startActivity(intent)
-                    }
-                    .addOnFailureListener {
-                        Toast.makeText(this, "자동 로그인 실패", Toast.LENGTH_SHORT).show()
-                    }
-            }
-        }
-
-        //로그인 버튼 클릭 시 이메일 or 비밀번호 입력 안했을 때 로그인 불가 로직
-        //+자동 로그인 버튼 클릭해놨을 때 자동으로 로그인 돼 메인 페이지로 넘어가게 하는 로직
-        btnLogin.setOnClickListener{
-            val email = etEmail.text.toString().trim()
-            val password = etPwd.text.toString().trim()
-
-
-            if (email.isEmpty() || password.isEmpty() || !email.contains("@")){
-                Toast.makeText(this, "이메일과 비밀번호를 모두 입력해주세요", Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
+            when {
+                strEmail.isEmpty() -> {
+                    Toast.makeText(this, "이메일을 입력해주세요.", Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
+                strPwd.isEmpty() -> {
+                    Toast.makeText(this, "비밀번호를 입력해주세요.", Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
+                !strEmail.contains("@") -> {
+                    Toast.makeText(this, "알맞지 않은 이메일 형식입니다.", Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
             }
 
-            // ✅ 여기서 체크박스 상태 가져와서 저장!
-            val isChecked = autoLogin.isChecked
-            val editor = prefs.edit()
-            editor.putString("email", email)
-            editor.putString("password", password)
-            editor.putBoolean("autoLogin", isChecked)
-            editor.apply()
 
-            loginUser(email, password)
+            auth.signInWithEmailAndPassword(strEmail, strPwd)
+                .addOnCompleteListener(this) { task ->
+                    if (task.isSuccessful) {
+                        val user = auth.currentUser
+                        val uid = user?.uid
+
+                        if (uid != null) {
+                            // Realtime DB에서 isBanned 확인
+                            val userRef =
+                                FirebaseDatabase.getInstance().getReference("drivers").child(uid)
+                            userRef.get().addOnSuccessListener { snapshot ->
+                                val isBanned =
+                                    snapshot.child("isBanned").getValue(Boolean::class.java)
+                                        ?: false
+
+                                if (isBanned) {
+                                    Toast.makeText(
+                                        this,
+                                        "정지된 계정입니다. 관리자에게 문의하세요.",
+                                        Toast.LENGTH_LONG
+                                    ).show()
+                                    auth.signOut() // 강제 로그아웃
+                                } else {
+                                    // 🔐 자동 로그인 정보 저장
+                                    val sharedPref = getSharedPreferences("MyApp", MODE_PRIVATE)
+                                    with(sharedPref.edit()) {
+                                        putBoolean("autoLogin", checkBoxAutoLogin.isChecked)
+                                        putString("userEmail", strEmail)
+                                        putString("userPassword", strPwd)
+                                        apply()
+                                    }
+
+                                    Toast.makeText(this, "로그인에 성공하셨습니다.", Toast.LENGTH_SHORT).show()
+                                    startActivity(Intent(this, RouteTime::class.java))
+                                    finish()
+                                }
+                            }.addOnFailureListener {
+                                Toast.makeText(this, "유저 정보 확인 중 오류가 발생했습니다.", Toast.LENGTH_SHORT)
+                                    .show()
+                            }
+                        }
+                    }
+                }
         }
 
         // 회원가입 버튼 → RegisterActivity 이동

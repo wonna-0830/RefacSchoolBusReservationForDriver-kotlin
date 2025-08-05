@@ -1,4 +1,4 @@
-package com.example.refac_driverapp
+package com.example.refac_driverapp.adapter
 
 import android.app.AlertDialog
 import android.view.LayoutInflater
@@ -8,6 +8,8 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import com.example.refac_driverapp.R
+import com.example.refac_driverapp.data.model.DrivedRecord
 import com.google.firebase.database.FirebaseDatabase
 
 class DriveAdapter(private val reservationList: ArrayList<DrivedRecord>,
@@ -19,7 +21,7 @@ class DriveAdapter(private val reservationList: ArrayList<DrivedRecord>,
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): DriveAdapter.ReservationViewHolder {
+    ): ReservationViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.item_list, parent, false)
         return ReservationViewHolder(view)

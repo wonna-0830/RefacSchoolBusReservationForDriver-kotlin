@@ -1,4 +1,4 @@
-package com.example.refac_driverapp
+package com.example.refac_driverapp.design
 
 import android.graphics.Rect
 import android.view.View

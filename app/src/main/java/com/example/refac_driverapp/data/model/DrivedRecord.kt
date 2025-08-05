@@ -1,4 +1,4 @@
-package com.example.refac_driverapp
+package com.example.refac_driverapp.data.model
 
 data class DrivedRecord(
     //데이터 저장을 위한 데이터클래스 (기사님이 운전한 정보 하나의 객체로 관리)

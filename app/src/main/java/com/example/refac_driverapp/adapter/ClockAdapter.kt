@@ -1,4 +1,4 @@
-package com.example.refac_driverapp
+package com.example.refac_driverapp.adapter
 
 import android.graphics.Color
 import android.graphics.Typeface
@@ -8,6 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.refac_driverapp.R
+import com.example.refac_driverapp.data.model.StationInfo
 
 class ClockAdapter(private val stationList: List<StationInfo>) :
     RecyclerView.Adapter<ClockAdapter.StationViewHolder>() {

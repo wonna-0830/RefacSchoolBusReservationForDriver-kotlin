@@ -14,7 +14,7 @@
         android:theme="@style/Theme.refac_DriverApp"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+            android:name=".feature.main.MainActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.refac_DriverApp">
@@ -24,12 +24,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Login" />
-        <activity android:name=".Register" />
-        <activity android:name=".Clock" />
-        <activity android:name=".RouteTime" />
-        <activity android:name=".Finish" />
-        <activity android:name=".SelectBusList" />
+        <activity android:name=".feature.login.LoginActivity" />
+        <activity android:name=".feature.register.RegisterActivity" />
+        <activity android:name=".feature.clock.ClockActivity" />
+        <activity android:name=".feature.routetime.RouteTimeActivity" />
+        <activity android:name=".feature.finish.FinishActivity" />
+        <activity android:name=".feature.selectbuslist.SelectBusListActivity" />
     </application>
 
 </manifest>

@@ -1,4 +1,4 @@
-package com.example.refac_driverapp
+package com.example.refac_driverapp.data.model
 
 data class StationInfo(
     val name : String,

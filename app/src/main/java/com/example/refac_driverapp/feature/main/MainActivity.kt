@@ -1,24 +1,17 @@
-package com.example.refac_driverapp
+package com.example.refac_driverapp.feature.main
 
-import android.app.AlarmManager
-import android.content.Context
 import android.content.Intent
-import android.net.Uri
-import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.provider.Settings
 import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.refac_driverapp.R
+import com.example.refac_driverapp.feature.routetime.RouteTimeActivity
+import com.example.refac_driverapp.feature.login.LoginActivity
 import com.example.refac_driverapp.ui.theme.Refac_DriverAppTheme
 import com.google.firebase.auth.FirebaseAuth
 
@@ -39,7 +32,7 @@ class MainActivity : ComponentActivity() {
             if (email != null && password != null) {
                 FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
                     .addOnSuccessListener {
-                        startActivity(Intent(this, RouteTime::class.java))
+                        startActivity(Intent(this, RouteTimeActivity::class.java))
                         finish()
                     }
                     .addOnFailureListener {
@@ -57,7 +50,7 @@ class MainActivity : ComponentActivity() {
     // 로그인으로 넘어가는 함수
     private fun moveToLogin() {
         Handler(Looper.getMainLooper()).postDelayed({
-            startActivity(Intent(this, Login::class.java))
+            startActivity(Intent(this, LoginActivity::class.java))
             finish()
         }, 5000)
     }
